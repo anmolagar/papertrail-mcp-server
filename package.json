@@ -1,0 +1,57 @@
+{
+  "name": "papertrail-mcp-server",
+  "version": "1.0.1",
+  "description": "MCP server for SolarWinds Papertrail log management — gives AI coding assistants (Copilot, Claude, Cursor) access to your production logs via the Model Context Protocol",
+  "main": "src/index.js",
+  "bin": {
+    "papertrail-mcp-server": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "papertrail",
+    "solarwinds",
+    "swo",
+    "solarwinds-observability",
+    "heroku",
+    "observability",
+    "logs",
+    "log-search",
+    "log-management",
+    "ai-tools",
+    "copilot",
+    "github-copilot",
+    "claude",
+    "cursor",
+    "nestjs",
+    "devops",
+    "monitoring"
+  ],
+  "author": "Anmol Maheshwari",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anmolm96/papertrail-mcp-server.git"
+  },
+  "homepage": "https://github.com/anmolm96/papertrail-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/anmolm96/papertrail-mcp-server/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0"
+  }
+}
