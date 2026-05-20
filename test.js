@@ -2,11 +2,15 @@
 /**
  * Quick smoke tests for all modules.
  * Run: node test.js
+ *
+ * Set PAPERTRAIL_API_TOKEN in your environment or in a .env file in the
+ * project root before running. A dummy token is used if none is found.
  */
 
-// Load config from Tradeline .env for integration test
-process.chdir("/Users/anmol/Desktop/Work/Tradeline/api");
-delete process.env.PAPERTRAIL_API_TOKEN;
+// Ensure a token exists so config.js doesn't call process.exit(1)
+if (!process.env.PAPERTRAIL_API_TOKEN) {
+  process.env.PAPERTRAIL_API_TOKEN = "test-dummy-token";
+}
 
 const config = require("./src/config");
 const { parseHumanTime, parseHerokuRouter, parseNestLog, stripAnsi } = require("./src/parsers");
@@ -29,9 +33,9 @@ function assert(label, condition) {
 
 // ── Test 1: Config ──
 console.log("\n── Config ──");
-assert("Token loaded from .env", typeof config.apiToken === "string" && config.apiToken.length > 0);
-assert("API type is swo", config.apiType === "swo");
-assert("API URL set", config.apiUrl.includes("solarwinds.com"));
+assert("Token is set", typeof config.apiToken === "string" && config.apiToken.length > 0);
+assert("API type is swo or classic", config.apiType === "swo" || config.apiType === "classic");
+assert("API URL set", config.apiUrl.includes("solarwinds.com") || config.apiUrl.includes("papertrailapp.com"));
 
 // ── Test 2: Package version ──
 console.log("\n── Package ──");
