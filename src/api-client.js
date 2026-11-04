@@ -73,7 +73,16 @@ function buildUrl(base, path, params = {}) {
  * Logs endpoint: /v1/logs
  */
 function swoRequest(path, params = {}) {
-  const url = buildUrl(config.apiUrl, path, params);
+  // SWO silently ignores Classic param names, so map them
+  const { q, min_time, max_time, limit, system_id, group_id } = params;
+  const url = buildUrl(config.apiUrl, path, {
+    filter: q,
+    startTime: min_time,
+    endTime: max_time,
+    pageSize: limit,
+    entityId: system_id,
+    group: group_id,
+  });
   return httpsGet(url, {
     Authorization: `Bearer ${config.apiToken}`,
   });
