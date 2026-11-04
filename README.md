@@ -20,7 +20,7 @@ npm install -g papertrail-mcp-server
 Or clone and link locally:
 
 ```bash
-git clone https://github.com/anmolm96/papertrail-mcp-server.git
+git clone https://github.com/anmolagar/papertrail-mcp-server.git
 cd papertrail-mcp-server
 npm install
 npm link

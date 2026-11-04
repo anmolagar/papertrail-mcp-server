@@ -37,11 +37,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anmolm96/papertrail-mcp-server.git"
+    "url": "git+https://github.com/anmolagar/papertrail-mcp-server.git"
   },
-  "homepage": "https://github.com/anmolm96/papertrail-mcp-server#readme",
+  "homepage": "https://github.com/anmolagar/papertrail-mcp-server#readme",
   "bugs": {
-    "url": "https://github.com/anmolm96/papertrail-mcp-server/issues"
+    "url": "https://github.com/anmolagar/papertrail-mcp-server/issues"
   },
   "engines": {
     "node": ">=18.0.0"

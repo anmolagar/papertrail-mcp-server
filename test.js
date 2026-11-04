@@ -144,6 +144,33 @@ const stackOnly = buildErrorSummary([
 ]);
 assert("Stack-only summary returns string", typeof stackOnly === "string");
 
+// ── Test 8: SWO query params ──
+console.log("\n── SWO API params ──");
+const https = require("https");
+const realRequest = https.request;
+let requestedPath;
+https.request = (opts) => {
+  requestedPath = opts.path;
+  return { on() {}, end() {} };
+};
+require("./src/api-client").swoRequest("/logs", {
+  q: "boom",
+  min_time: "2025-01-15T00:00:00.000Z",
+  max_time: "2025-01-16T00:00:00.000Z",
+  limit: 5,
+  system_id: "sys-1",
+  group_id: "grp-1",
+});
+https.request = realRequest;
+const sent = new URLSearchParams(requestedPath.split("?")[1]);
+assert("q → filter", sent.get("filter") === "boom");
+assert("min_time → startTime", sent.get("startTime") === "2025-01-15T00:00:00.000Z");
+assert("max_time → endTime", sent.get("endTime") === "2025-01-16T00:00:00.000Z");
+assert("limit → pageSize", sent.get("pageSize") === "5");
+assert("system_id → entityId", sent.get("entityId") === "sys-1");
+assert("group_id → group", sent.get("group") === "grp-1");
+assert("No Classic names sent", !["q", "min_time", "max_time", "limit"].some((k) => sent.has(k)));
+
 // ── Summary ──
 console.log(`\n═══════════════════════════════`);
 console.log(`Results: ${pass} passed, ${fail} failed`);
